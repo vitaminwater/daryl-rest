@@ -1,0 +1,19 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "uMtDxWDl9wpoAJLg2620/rwjFvk=",
+			"path": "github.com/Masterminds/squirrel",
+			"revision": "a6b93000bd219143c56c16e6cb1c4b91da3f224b",
+			"revisionTime": "2017-08-25T19:47:51Z"
+		},
+		{
+			"checksumSHA1": "BYvROBsiyAXK4sq6yhDe8RgT4LM=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "89742aefa4b206dcf400792f3bd35b542998eb3b",
+			"revisionTime": "2017-08-22T13:27:46Z"
+		}
+	],
+	"rootPath": "github.com/vitaminwater/daryl_graphql"
+}
