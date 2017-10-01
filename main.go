@@ -1,13 +1,14 @@
 package main
 
 import (
-	//log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"github.com/vitaminwater/daryl_db"
 )
 
 type Test struct {
-	Slug string `db:"slug" access:"i,s"`
-	Name string `db:"name" access:"i,u,s"`
+	Id       int    `db:"id" access:"s"`
+	Slug     string `db:"slug" access:"i,s"`
+	UserName string `db:"username" access:"i,u,s"`
 }
 
 func init() {
@@ -15,6 +16,11 @@ func init() {
 }
 
 func main() {
-	test := Test{"eR@3rlka", "lolname"}
-	daryl_db.Insert(test)
+	test := Test{Slug: daryl_db.UUID(), UserName: "lolname"}
+	err := daryl_db.Insert("primate", &test)
+	if err != nil {
+		log.Fatal(err)
+	}
+	test.UserName = "lolname2"
+	daryl_db.Update("primate", "id", test)
 }
