@@ -17,13 +17,22 @@ import (
 const AUTH_TOKEN_HEADER = "X-Daryl-Auth-Token"
 
 func userMessage(c *gin.Context) {
-	url := c.MustGet("daryl_url")
+	url := c.MustGet("daryl_url").(string)
 	m := protodef.Message{}
 	if err := c.BindJSON(&m); err != nil {
+		log.Info(err)
 		c.JSON(http.StatusBadRequest, gin.H{})
 		return
 	}
-	log.Info(url, m)
+	d := openDarylConnection(url)
+	um := protodef.UserMessageRequest{Identifier: "lol", Message: &m}
+	resp, err := d.UserMessage(context.Background(), &um)
+	if err != nil {
+		log.Info(err)
+		c.JSON(http.StatusBadRequest, gin.H{})
+		return
+	}
+	log.Info(url, m, resp)
 	c.JSON(200, gin.H{
 		"status": "posted",
 	})
